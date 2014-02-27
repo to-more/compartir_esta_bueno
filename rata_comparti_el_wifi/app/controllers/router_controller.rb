@@ -1,0 +1,2 @@
+class RouterController < ApplicationController
+end

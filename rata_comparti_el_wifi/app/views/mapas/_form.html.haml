@@ -1,0 +1,11 @@
+= form_for(@mapa) do |f|
+  - if @mapa.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@mapa.errors.count, 'error')} prohibited this user from being saved:"
+      %ul
+      - @mapa.errors.full_messages.each do |msg|
+        %li= msg
+  
+
+  .actions
+    = f.submit
