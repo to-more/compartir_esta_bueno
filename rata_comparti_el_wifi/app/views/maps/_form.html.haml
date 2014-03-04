@@ -1,0 +1,22 @@
+= form_for(@map) do |f|
+  - if @map.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@map.errors.count, 'error')} prohibited this user from being saved:"
+      %ul
+      - @map.errors.full_messages.each do |msg|
+        %li= msg
+  
+  .field
+    = f.label :address
+    %br
+    = f.text_field :address
+  .field
+    = f.label :latitude
+    %br
+    = f.text_field :latitude
+  .field
+    = f.label :longitude
+    %br
+    = f.text_field :longitude
+
+  %input{:type => "submit", :value => "Create map",:class => ['btn', 'btn-xm', 'btn-success']}

@@ -3,5 +3,16 @@ body,
 #map {
     width: 99.5%;
     height: 99.5%;
-    border:0%
+    padding-top: 2%;
+    padding-left: 0.5%;
+    border:0%;
+}
+
+#main-bar{
+	background-color: #6F5499
+}
+
+#contextMenu {
+    position: absolute;
+    display:none;
 }

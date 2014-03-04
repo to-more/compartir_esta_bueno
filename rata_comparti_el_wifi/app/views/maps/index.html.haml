@@ -1,0 +1,20 @@
+%h1= t('.title')
+%p= link_to t('.new_map'), new_map_path
+
+%table
+  %thead
+    %tr
+      %th= Map.human_attribute_name :address
+      %th= Map.human_attribute_name :latitude
+      %th= Map.human_attribute_name :longitude
+      %th{:colspan => 3}= t 'actions'
+  
+  %tbody
+    - for map in @maps
+      %tr{ :class => cycle(:odd, :even) }
+        %td= map.address
+        %td= map.latitude
+        %td= map.longitude
+        %td.action= link_to t('show'), map
+        %td.action= link_to t('edit'), edit_map_path(map)
+        %td.action= link_to t('destroy'), map, :method => :delete

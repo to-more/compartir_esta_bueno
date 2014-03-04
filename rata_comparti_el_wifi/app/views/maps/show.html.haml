@@ -1,0 +1,12 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), maps_path
+  = link_to t('edit'), edit_map_path(@map)
+
+%dl
+  %dt= Map.human_attribute_name :address
+  %dd= @map.address
+  %dt= Map.human_attribute_name :latitude
+  %dd= @map.latitude
+  %dt= Map.human_attribute_name :longitude
+  %dd= @map.longitude

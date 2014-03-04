@@ -1,5 +1,7 @@
 RataCompartiElWifi::Application.routes.draw do
 
+  resources :maps
+
   resources :mapas
 
   #get "welcome/index"
