@@ -2,13 +2,14 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery -> 
-		zoom = 11.5
+		zoom = 3
 		map = new OpenLayers.Map("map")
 		mapnik = new OpenLayers.Layer.OSM()
 		fromProjection = new OpenLayers.Projection("EPSG:4326")
 		toProjection = new OpenLayers.Projection("EPSG:900913")
 		position = new OpenLayers.LonLat(-58.381593100000030000,-34.619000000000 ).transform( fromProjection, toProjection)
-		map.addLayer(mapnik);map.setCenter(position, zoom )
+		map.addLayer(mapnik)
+		map.setCenter(position, zoom )
 		
 		contextMenu = $("#contextMenu")
 		
@@ -23,11 +24,23 @@ jQuery ->
 		$("body").on "contextmenu",  "#map", subMenu
 
 		$("#lock_up_location").click () -> 
+			address = $("#busca_router").val()
+			url = "search_by_address/" + address
 			request = $.ajax
 				type: "GET"
-				url: "maps"
-			request.done console.log "Send ajax request"
-
+				url: url
+				dataType: "json"
+				success: (data) -> 
+					console.log data.latitude
+					console.log data.longitude
+					markerslayer = new OpenLayers.Layer.Markers( "Markers" )
+					map.addLayer(markerslayer)
+					size = new OpenLayers.Size(30,35);
+					offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+					icon = new OpenLayers.Icon('http://www.clker.com/cliparts/W/x/V/N/a/o/orange-pin-md.png', size, offset)
+					lonLat = new OpenLayers.LonLat data.latitude, data.longitude, icon.clone
+					marker_value = lonLat.transform(fromProjection,toProjection)
+					markerslayer.addMarker new OpenLayers.Marker marker_value
 
 		enter_pressed = (event) -> 
 			event = event or window.event
@@ -38,19 +51,7 @@ jQuery ->
 					$("#lock_up_location").trigger "click"
 
 		$("#busca_router").keypress enter_pressed
-
-		listener = (e) ->
-			contextMenu.hide()
-			position = this.events.getMousePosition(e)
-			size = new OpenLayers.Size(30,35);
-			offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-			icon = new OpenLayers.Icon('http://www.clker.com/cliparts/W/x/V/N/a/o/orange-pin-md.png', size, offset)
-			lonlat = map.getLonLatFromPixel(position)
-			lonlatTransf = lonlat.transform(map.getProjectionObject(), fromProjection)
-			lonlat = lonlatTransf.transform(fromProjection, map.getProjectionObject())
-			markerslayer = new OpenLayers.Layer.Markers( "Markers" )
-			markerslayer.addMarker(new OpenLayers.Marker(lonlat, icon))
-			map.addLayer(markerslayer)
 		
-		map.events.register("click", map, listener)
-		map.addControl(new OpenLayers.Control.LayerSwitcher())
+		#map.addControl(new OpenLayers.Control.LayerSwitcher())
+
+

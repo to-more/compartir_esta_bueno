@@ -21,6 +21,12 @@ class MapsController < ApplicationController
   def edit
   end
 
+  def search_by_address
+    @map = Map.new(:address => params[:address])
+    @map.set_location
+    render json: @map
+  end
+
   # POST /maps
   # POST /maps.json
   def create
