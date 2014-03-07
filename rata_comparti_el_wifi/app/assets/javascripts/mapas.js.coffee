@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery -> 
-		zoom = 3
+		zoom = 11
 		map = new OpenLayers.Map("map")
 		mapnik = new OpenLayers.Layer.OSM()
 		fromProjection = new OpenLayers.Projection("EPSG:4326")
@@ -31,6 +31,9 @@ jQuery ->
 				url: url
 				dataType: "json"
 				success: (data) -> 
+					point = (x, y) -> 
+					 	x: x
+					 	y: y
 					console.log data.latitude
 					console.log data.longitude
 					markerslayer = new OpenLayers.Layer.Markers( "Markers" )
@@ -38,9 +41,12 @@ jQuery ->
 					size = new OpenLayers.Size(30,35);
 					offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
 					icon = new OpenLayers.Icon('http://www.clker.com/cliparts/W/x/V/N/a/o/orange-pin-md.png', size, offset)
-					lonLat = new OpenLayers.LonLat data.latitude, data.longitude, icon.clone
-					marker_value = lonLat.transform(fromProjection,toProjection)
-					markerslayer.addMarker new OpenLayers.Marker marker_value
+					pixel = point data.longitude, data.latitude
+					lonLat = new OpenLayers.LonLat(data.longitude, data.latitude).transform( fromProjection, toProjection)
+					markerslayer.addMarker( new OpenLayers.Marker lonLat, icon)
+					zoom = 15
+					map.setCenter(lonLat, zoom )
+
 
 		enter_pressed = (event) -> 
 			event = event or window.event
@@ -52,6 +58,4 @@ jQuery ->
 
 		$("#busca_router").keypress enter_pressed
 		
-		#map.addControl(new OpenLayers.Control.LayerSwitcher())
-
-
+		map.addControl(new OpenLayers.Control.LayerSwitcher())
