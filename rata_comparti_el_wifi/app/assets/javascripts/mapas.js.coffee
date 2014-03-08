@@ -19,21 +19,20 @@ jQuery ->
 			markerslayer.addMarker( new OpenLayers.Marker lonLat, icon)
 			lonLat
 
-
-		resp = $.getJSON "http://smart-ip.net/geoip-json?callback=?", (data) -> 
-			console.log data.host
-			ip = data.host.replace /[.]/g, '-'
+		resp = $.getJSON "http://api.hostip.info/get_json.php", (data) ->
+			console.log data.ip
+			ip = data.ip.replace /[.]/g, '-'
 			url = "/search_by_ip/" + ip
 			console.log ip
 			request = $.ajax
 				type: "GET"
 				url: url
 				dataType: "json"
-				success: (data) -> 
+				success: (data) ->
 					console.log data.latitude
 					console.log data.longitude
 					lonLat = addMarker(map,data)
-					map.setCenter(lonLat, zoom )
+					map.setCenter(lonLat, zoom )		
 
 		contextMenu = $("#contextMenu")
 		
@@ -44,10 +43,13 @@ jQuery ->
 				display: "block"
 				position: "absolute"
 			false
-		
+
 		$("body").on "contextmenu",  "#map", subMenu
 
+		map.events.register "click", map.events.object, () -> contextMenu.hide()
+		
 		$("#lock_up_location").click () -> 
+			$("#contextMenu").hide
 			address = $("#busca_router").val()
 			url = "search_by_address/" + address
 			request = $.ajax
