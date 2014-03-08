@@ -27,6 +27,12 @@ class MapsController < ApplicationController
     render json: @map
   end
 
+  def search_by_ip
+    @map = Map.new(:ip => params[:ip])
+    @map.search_by_ip
+    render json: @map
+  end
+
   # POST /maps
   # POST /maps.json
   def create
@@ -76,6 +82,6 @@ class MapsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def map_params
-      params.require(:map).permit(:address, :latitude, :longitude)
+      params.require(:map).permit(:address, :latitude, :longitude, :ip)
     end
 end

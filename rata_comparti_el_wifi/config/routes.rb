@@ -4,6 +4,8 @@ RataCompartiElWifi::Application.routes.draw do
 
   get '/search_by_address/:address', to: 'maps#search_by_address'
 
+  get '/search_by_ip/:ip', to: 'maps#search_by_ip'
+
   resources :mapas
 
   #get "welcome/index"

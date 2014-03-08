@@ -39,6 +39,9 @@ gem 'openlayers-rails'
 # For find location by ip or street
 gem 'geocoder'
 
+#For search by ip based on document database
+gem 'geoip'
+
 # pretty DRY html 
 gem 'haml'
 

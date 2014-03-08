@@ -7,10 +7,34 @@ jQuery ->
 		mapnik = new OpenLayers.Layer.OSM()
 		fromProjection = new OpenLayers.Projection("EPSG:4326")
 		toProjection = new OpenLayers.Projection("EPSG:900913")
-		position = new OpenLayers.LonLat(-58.381593100000030000,-34.619000000000 ).transform( fromProjection, toProjection)
 		map.addLayer(mapnik)
-		map.setCenter(position, zoom )
-		
+
+		addMarker = (map,data) -> 
+			markerslayer = new OpenLayers.Layer.Markers( "Markers" )
+			map.addLayer(markerslayer)
+			size = new OpenLayers.Size(30,35);
+			offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+			icon = new OpenLayers.Icon('http://www.clker.com/cliparts/W/x/V/N/a/o/orange-pin-md.png', size, offset)
+			lonLat = new OpenLayers.LonLat(data.longitude, data.latitude).transform( fromProjection, toProjection)
+			markerslayer.addMarker( new OpenLayers.Marker lonLat, icon)
+			lonLat
+
+
+		resp = $.getJSON "http://smart-ip.net/geoip-json?callback=?", (data) -> 
+			console.log data.host
+			ip = data.host.replace /[.]/g, '-'
+			url = "/search_by_ip/" + ip
+			console.log ip
+			request = $.ajax
+				type: "GET"
+				url: url
+				dataType: "json"
+				success: (data) -> 
+					console.log data.latitude
+					console.log data.longitude
+					lonLat = addMarker(map,data)
+					map.setCenter(lonLat, zoom )
+
 		contextMenu = $("#contextMenu")
 		
 		subMenu = (e) -> 
@@ -31,19 +55,9 @@ jQuery ->
 				url: url
 				dataType: "json"
 				success: (data) -> 
-					point = (x, y) -> 
-					 	x: x
-					 	y: y
 					console.log data.latitude
 					console.log data.longitude
-					markerslayer = new OpenLayers.Layer.Markers( "Markers" )
-					map.addLayer(markerslayer)
-					size = new OpenLayers.Size(30,35);
-					offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-					icon = new OpenLayers.Icon('http://www.clker.com/cliparts/W/x/V/N/a/o/orange-pin-md.png', size, offset)
-					pixel = point data.longitude, data.latitude
-					lonLat = new OpenLayers.LonLat(data.longitude, data.latitude).transform( fromProjection, toProjection)
-					markerslayer.addMarker( new OpenLayers.Marker lonLat, icon)
+					lonLat = addMarker(map,data)
 					zoom = 15
 					map.setCenter(lonLat, zoom )
 
