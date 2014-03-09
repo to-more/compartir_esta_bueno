@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery -> 
 		zoom = 11
+
 		map = new OpenLayers.Map("map")
 		mapnik = new OpenLayers.Layer.OSM()
 		fromProjection = new OpenLayers.Projection("EPSG:4326")
