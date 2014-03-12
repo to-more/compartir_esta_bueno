@@ -1,0 +1,22 @@
+%h1= t('.title')
+%p= link_to t('.new_router'), new_router_path
+
+%table
+  %thead
+    %tr
+      %th= Router.human_attribute_name :mac
+      %th= Router.human_attribute_name :essid
+      %th= Router.human_attribute_name :online
+      %th= Router.human_attribute_name :ip
+      %th{:colspan => 3}= t 'actions'
+  
+  %tbody
+    - for router in @routers
+      %tr{ :class => cycle(:odd, :even) }
+        %td= router.mac
+        %td= router.essid
+        %td= router.online
+        %td= router.ip
+        %td.action= link_to t('show'), router
+        %td.action= link_to t('edit'), edit_router_path(router)
+        %td.action= link_to t('destroy'), router, :confirm => t('are_you_sure'), :method => :delete

@@ -1,0 +1,25 @@
+.container
+  = form_for(@router) do |f|
+    - if @router.errors.any?
+      #errorExplanation
+        %h2= "#{pluralize(@router.errors.count, 'error')} prohibited this user from being saved:"
+        %ul
+        - @router.errors.full_messages.each do |msg|
+          %li= msg
+
+    %input{:type=>"email", :class=>"form-control", :placeholder=>"Email address", :equired=>"autofocus", :value=>:mac} 
+
+    .field
+      = f.label :essid
+      %br
+      = f.text_field :essid
+    .field
+      = f.label :online
+      %br
+      = f.check_box :online
+    .field
+      = f.label :ip
+      %br
+      = f.text_field :ip
+
+      %input{:type => "submit", :value => "Create map",:class => ['btn', 'btn-xm', 'btn-success']}

@@ -1,0 +1,14 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), routers_path
+  = link_to t('edit'), edit_router_path(@router)
+
+%dl
+  %dt= Router.human_attribute_name :mac
+  %dd= @router.mac
+  %dt= Router.human_attribute_name :essid
+  %dd= @router.essid
+  %dt= Router.human_attribute_name :online
+  %dd= @router.online
+  %dt= Router.human_attribute_name :ip
+  %dd= @router.ip

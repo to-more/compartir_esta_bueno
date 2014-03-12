@@ -1,0 +1,20 @@
+%h1= t('.title')
+%p= link_to t('.new_node'), new_node_path
+
+%table
+  %thead
+    %tr
+      %th= Node.human_attribute_name :router
+      %th= Node.human_attribute_name :location
+      %th= Node.human_attribute_name :link
+      %th{:colspan => 3}= t 'actions'
+  
+  %tbody
+    - for node in @nodes
+      %tr{ :class => cycle(:odd, :even) }
+        %td= node.router
+        %td= node.location
+        %td= node.link
+        %td.action= link_to t('show'), node
+        %td.action= link_to t('edit'), edit_node_path(node)
+        %td.action= link_to t('destroy'), node, :confirm => t('are_you_sure'), :method => :delete

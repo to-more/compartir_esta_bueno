@@ -1,0 +1,12 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), nodes_path
+  = link_to t('edit'), edit_node_path(@node)
+
+%dl
+  %dt= Node.human_attribute_name :router
+  %dd= @node.router
+  %dt= Node.human_attribute_name :location
+  %dd= @node.location
+  %dt= Node.human_attribute_name :link
+  %dd= @node.link

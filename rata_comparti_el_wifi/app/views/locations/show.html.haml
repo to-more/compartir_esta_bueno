@@ -1,0 +1,14 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), locations_path
+  = link_to t('edit'), edit_location_path(@location)
+
+%dl
+  %dt= Location.human_attribute_name :ip
+  %dd= @location.ip
+  %dt= Location.human_attribute_name :address
+  %dd= @location.address
+  %dt= Location.human_attribute_name :latitude
+  %dd= @location.latitude
+  %dt= Location.human_attribute_name :longitude
+  %dd= @location.longitude
