@@ -1,8 +1,20 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
 jQuery -> 
+
 		zoom = 11
+
+		$("#main-bar").animate({opacity: 0.45},"slow")
+
+		$("#main-bar").on("mouseover",() ->
+			$("#main-bar").animate({opacity: 0.85},"slow")
+		)
+
+		$("#main-bar").on("mouseleave",() ->
+			$("#main-bar").animate({opacity: 0.0},"slow")
+		)
 
 		map = new OpenLayers.Map("map")
 		mapnik = new OpenLayers.Layer.OSM()

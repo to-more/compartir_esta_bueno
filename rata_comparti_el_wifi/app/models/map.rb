@@ -22,7 +22,7 @@ class Map
 		if self.address then
 			search = Geocoder.search(self.address)
 		end
-		result = nil
+
 		result =  search.first
 		if result then
 			self.coordinates = result.coordinates if self.address_changed? || self.new_record?
