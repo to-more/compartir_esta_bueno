@@ -9,11 +9,11 @@ jQuery ->
 		$("#main-bar").animate({opacity: 0.45},"slow")
 
 		$("#main-bar").on("mouseover",() ->
-			$("#main-bar").animate({opacity: 0.85},"slow")
+			$("#main-bar").stop().animate({opacity: 0.85},"slow")
 		)
 
 		$("#main-bar").on("mouseleave",() ->
-			$("#main-bar").animate({opacity: 0.0},"slow")
+			$("#main-bar").stop().animate({opacity: 0.0},"slow")
 		)
 
 		map = new OpenLayers.Map("map")
