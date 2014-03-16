@@ -4,4 +4,5 @@ class Router
   field :essid, type: String
   field :online, type: Mongoid::Boolean
   field :ip, type: String
+  field :password, type: String
 end

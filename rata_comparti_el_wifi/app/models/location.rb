@@ -19,9 +19,9 @@ class Location
 
 		if self.address then
 			search = Geocoder.search(self.address)
+			result =  search.first
 		end
-
-		result =  search.first
+		
 		if result then
 			self.coordinates = result.coordinates if self.address_changed? || self.new_record?
 			lat, lng = result.coordinates

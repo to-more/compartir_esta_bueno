@@ -69,6 +69,6 @@ class MapasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mapa_params
-      params[:mapa]
+      params.require(:mapa).permit(:address)
     end
 end

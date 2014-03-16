@@ -24,6 +24,7 @@ class NodesController < ApplicationController
   # POST /nodes
   # POST /nodes.json
   def create
+
     @node = Node.new(node_params)
 
     respond_to do |format|
@@ -69,6 +70,6 @@ class NodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def node_params
-      params.require(:node).permit(:address)
+      params[:node]
     end
 end

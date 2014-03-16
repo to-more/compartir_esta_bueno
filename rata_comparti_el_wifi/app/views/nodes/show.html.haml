@@ -5,8 +5,8 @@
 
 %dl
   %dt= Node.human_attribute_name :router
-  %dd= @node.router
+  %dd= @node.router.mac
   %dt= Node.human_attribute_name :location
-  %dd= @node.location
+  %dd= @node.location.address
   %dt= Node.human_attribute_name :link
   %dd= @node.link

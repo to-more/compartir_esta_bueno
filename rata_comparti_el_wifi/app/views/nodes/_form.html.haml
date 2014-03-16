@@ -8,9 +8,9 @@
           - @node.errors.full_messages.each do |msg|
             %li= msg
 
-      %input{ :class=>"form-control", :placeholder=>"Address", :value=>:address}
-      %input{ :class=>"form-control", :placeholder=>"mac", :value=>:link}
-      %input{ :class=>"form-control", :placeholder=>"essid", :value=>:address}
-      %input{ :class=>"form-control", :placeholder=>"ip", :value=>:address}
-      %input{ :class=>"form-control", :placeholder=>"Password", :value=>:address}
+      %input{ :class=>"form-control", :placeholder=>"Address", :value=> @node.location.address }
+      %input{ :class=>"form-control", :placeholder=>"mac", :value=> @node.router.mac }
+      %input{ :class=>"form-control", :placeholder=>"essid", :value=> @node.router.essid }
+      %input{ :class=>"form-control", :placeholder=>"ip", :value=> @node.location.ip }
+      %input{ :class=>"form-control", :placeholder=>"Password", :value=> @node.router.password }
       %button{:class=>"btn btn-lg btn-primary btn-block", :type=>"submit"}Guardar
