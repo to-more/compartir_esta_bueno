@@ -6,6 +6,16 @@ jQuery ->
 
 		zoom = 11
 
+		$("#busca_router").keyup((e)->
+			if e.keyCode is 9 
+				$("#main-bar").animate({opacity: 0.45},"slow")
+		)
+
+		$("#busca_router").keydown((e)->
+			if e.keyCode is 9 
+				$("#main-bar").animate({opacity: 0.0},"slow")
+		)
+
 		$("#main-bar").animate({opacity: 0.45},"slow")
 
 		$("#main-bar").on("mouseover",() ->
