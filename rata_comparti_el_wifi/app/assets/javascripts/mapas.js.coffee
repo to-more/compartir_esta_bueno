@@ -6,6 +6,19 @@ jQuery ->
 
 		zoom = 11
 
+		$("#new_node").click (e)-> 
+			contextMenu.hide()
+			e.preventDefault()
+			url = "/nodes/new"
+			$("#bodyContent").load url, () ->
+				$("#bodyContent").animate({
+					width: "70%",
+					height: "100%",
+					opacity: 0.20
+				 }, "fast")
+
+
+
 		$("#busca_router").keyup((e)->
 			if e.keyCode is 9 
 				$("#main-bar").animate({opacity: 0.45},"slow")
