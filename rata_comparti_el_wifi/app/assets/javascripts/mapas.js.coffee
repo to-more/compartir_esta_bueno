@@ -6,18 +6,22 @@ jQuery ->
 
 		zoom = 11
 
+		$("#back_to_root").click (e)-> 
+			$("#bodyContent").hide "slow", () -> 
+				$("#map").show "slow"
+				e.preventDefault()
+			false
+
 		$("#new_node").click (e)-> 
-			contextMenu.hide()
 			e.preventDefault()
+			$("#contextMenu").hide()
+			$("#map").hide "slow", loadRelated
+
+		loadRelated = () ->
 			url = "/nodes/new"
-			$("#bodyContent").load url, () ->
-				$("#bodyContent").animate({
-					width: "70%",
-					height: "100%",
-					opacity: 0.20
-				 }, "fast")
-
-
+			$("#bodyContent").show "slow", ()->
+				$("#bodyContent").load url
+			
 
 		$("#busca_router").keyup((e)->
 			if e.keyCode is 9 
@@ -35,8 +39,10 @@ jQuery ->
 			$("#main-bar").stop().animate({opacity: 0.85},"slow")
 		)
 
-		$("#main-bar").on("mouseleave",() ->
-			$("#main-bar").stop().animate({opacity: 0.0},"slow")
+		$("#main-bar").on("mouseleave",(e) ->
+			focused = $(document.activeElement)
+			idFocused = focused.attr("id")
+			$("#main-bar").stop().animate({opacity: 0.0},"slow") if idFocused isnt "busca_router"
 		)
 
 		map = new OpenLayers.Map("map")
@@ -85,7 +91,7 @@ jQuery ->
 		map.events.register "click", map.events.object, () -> contextMenu.hide()
 		
 		$("#lock_up_location").click () -> 
-			$("#contextMenu").hide
+			$("#contextMenu").hide()
 			address = $("#busca_router").val()
 			url = "search_by_address/" + address
 			request = $.ajax
