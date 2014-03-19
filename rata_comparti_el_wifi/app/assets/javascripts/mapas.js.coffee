@@ -6,6 +6,9 @@ jQuery ->
 
 		zoom = 11
 
+
+
+
 		$("#back_to_root").click (e)-> 
 			$("#bodyContent").hide "slow", () -> 
 				$("#map").show "slow"
@@ -60,6 +63,20 @@ jQuery ->
 			lonLat = new OpenLayers.LonLat(data.longitude, data.latitude).transform( fromProjection, toProjection)
 			markerslayer.addMarker( new OpenLayers.Marker lonLat, icon)
 			lonLat
+
+		request_index = $.ajax
+			type: "GET"
+			url: "/nodes"
+			dataType: "json"
+			success: (data) ->
+				console.log data
+				for node in data
+					console.log node.location.address
+					console.log node.location.longitude
+					console.log node.location.latitude
+					lonLat = addMarker(map, node.location)
+				false
+
 
 		resp = $.getJSON "http://api.hostip.info/get_json.php", (data) ->
 			console.log data.ip

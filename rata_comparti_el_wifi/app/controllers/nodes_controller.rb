@@ -5,6 +5,7 @@ class NodesController < ApplicationController
   # GET /nodes.json
   def index
     @nodes = Node.all
+    render json: @nodes
   end
 
   # GET /nodes/1
@@ -24,12 +25,12 @@ class NodesController < ApplicationController
   # POST /nodes
   # POST /nodes.json
   def create
-
+  
     @node = Node.new(node_params)
 
     respond_to do |format|
       if @node.save
-        format.html { redirect_to @node, notice: 'Node was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Node was successfully created.' }
         format.json { render action: 'show', status: :created, location: @node }
       else
         format.html { render action: 'new' }
