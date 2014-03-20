@@ -16,6 +16,7 @@ class NodesController < ApplicationController
   # GET /nodes/new
   def new
     @node = Node.new
+    @location = @node.build_location
   end
 
   # GET /nodes/1/edit
@@ -25,8 +26,8 @@ class NodesController < ApplicationController
   # POST /nodes
   # POST /nodes.json
   def create
-  
-    @node = Node.new(node_params)
+    params.permit!
+    @node = Node.new(params[:node])
 
     respond_to do |format|
       if @node.save

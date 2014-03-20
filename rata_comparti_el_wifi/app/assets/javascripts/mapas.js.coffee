@@ -54,13 +54,13 @@ jQuery ->
 		toProjection = new OpenLayers.Projection("EPSG:900913")
 		map.addLayer(mapnik)
 
-		addMarker = (map,data) -> 
+		addMarker = (map,longitude, latitude) -> 
 			markerslayer = new OpenLayers.Layer.Markers( "Markers" )
 			map.addLayer(markerslayer)
 			size = new OpenLayers.Size(30,35);
 			offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
 			icon = new OpenLayers.Icon('http://www.clker.com/cliparts/W/x/V/N/a/o/orange-pin-md.png', size, offset)
-			lonLat = new OpenLayers.LonLat(data.longitude, data.latitude).transform( fromProjection, toProjection)
+			lonLat = new OpenLayers.LonLat(longitude, latitude).transform( fromProjection, toProjection)
 			markerslayer.addMarker( new OpenLayers.Marker lonLat, icon)
 			lonLat
 
@@ -69,14 +69,11 @@ jQuery ->
 			url: "/nodes"
 			dataType: "json"
 			success: (data) ->
-				console.log data
+				console.log "Size: " + data.length
 				for node in data
-					console.log node.location.address
-					console.log node.location.longitude
-					console.log node.location.latitude
-					lonLat = addMarker(map, node.location)
+					console.log "Address: " + node.location.address
+					lonLat = addMarker(map,node.location.coordinates[1], node.location.coordinates[0])
 				false
-
 
 		resp = $.getJSON "http://api.hostip.info/get_json.php", (data) ->
 			console.log data.ip
@@ -90,7 +87,7 @@ jQuery ->
 				success: (data) ->
 					console.log data.latitude
 					console.log data.longitude
-					lonLat = addMarker(map,data)
+					lonLat = addMarker(map,data.longitude, data.latitude)
 					map.setCenter(lonLat, zoom )		
 
 		contextMenu = $("#contextMenu")

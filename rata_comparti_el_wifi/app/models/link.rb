@@ -1,6 +1,6 @@
 class Link
   include Mongoid::Document
-  field :coordinates, type: Coordinate
+  embeds_many :coordinates
   
 	def link_to coordinate
 		if @coordinates  then

@@ -22,9 +22,7 @@ class MapsController < ApplicationController
   end
 
   def search_by_address
-    @map = Map.new(:address => params[:address])
-    @map.set_location
-    render json: @map
+
   end
 
   def search_by_ip
