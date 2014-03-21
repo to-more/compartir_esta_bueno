@@ -71,9 +71,15 @@ jQuery ->
 			success: (data) ->
 				console.log "Size: " + data.length
 				for node in data
-					console.log "Address: " + node.location.address
-					lonLat = addMarker(map,node.location.coordinates[1], node.location.coordinates[0])
-				false
+					long = 0
+					lat = 0
+					if node.location 
+						long = node.location.coordinates[0]
+						lat  = node.location.coordinates[1] 
+						console.log "Address: " + node.location.address
+						console.log "[" + lat + "," + long + "]";
+
+					lonLat = addMarker(map, long, lat)
 
 		resp = $.getJSON "http://api.hostip.info/get_json.php", (data) ->
 			console.log data.ip
@@ -88,7 +94,7 @@ jQuery ->
 					console.log data.latitude
 					console.log data.longitude
 					lonLat = addMarker(map,data.longitude, data.latitude)
-					map.setCenter(lonLat, zoom )		
+					map.setCenter(lonLat, zoom )
 
 		contextMenu = $("#contextMenu")
 		

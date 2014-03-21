@@ -24,7 +24,6 @@ class Location
 			self.coordinates = result.coordinates if self.address_changed? || self.new_record?
 			self.latitude = result.coordinates[0]
 			self.longitude = result.coordinates[1]
-
 		end 
 
 	end
