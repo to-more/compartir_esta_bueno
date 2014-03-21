@@ -121,7 +121,7 @@ jQuery ->
 				success: (data) -> 
 					console.log data.latitude
 					console.log data.longitude
-					lonLat = addMarker(map,data)
+					lonLat = addMarker(map,data.longitude, data.latitude)
 					zoom = 15
 					map.setCenter(lonLat, zoom )
 
