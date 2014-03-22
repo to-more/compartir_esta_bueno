@@ -6,8 +6,6 @@ class Node
 	embeds_one :location, class_name: "Location"
 	embeds_one :link, class_name: "Link"
   	
-  	accepts_nested_attributes_for :location
-	
 
 	def link_to coordinate
 		@link.link_to location

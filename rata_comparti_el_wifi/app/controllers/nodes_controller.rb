@@ -16,7 +16,8 @@ class NodesController < ApplicationController
   # GET /nodes/new
   def new
     @node = Node.new
-    @location = @node.build_location
+    @node.build_location
+    @node.build_router
   end
 
   # GET /nodes/1/edit
@@ -26,8 +27,8 @@ class NodesController < ApplicationController
   # POST /nodes
   # POST /nodes.json
   def create
-    params.permit!
-    @node = Node.new(params[:node])
+    
+    @node = Node.new(node_params)
 
     respond_to do |format|
       if @node.save
@@ -72,6 +73,6 @@ class NodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def node_params
-      params[:node]
+      params.require(:node).permit({location: [:address]}, {router: [:ip, :mac, :essid, :password]})
     end
 end

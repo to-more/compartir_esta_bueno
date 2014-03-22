@@ -1,6 +1,7 @@
 class Link
   include Mongoid::Document
   embeds_many :coordinates
+  embedded_in :node
   
 	def link_to coordinate
 		if @coordinates  then

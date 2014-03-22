@@ -8,11 +8,11 @@ class Location
 	field :longitude, type: Float
 	field :coordinates, :type => Array
 
-	embedded_in :node, :inverse_of => :location
+	embedded_in :node
 
   	geocoded_by :address 
 
- 	before_save :set_location
+ 	after_initialize :set_location
 
 	after_validation :geocode 
 
@@ -20,10 +20,9 @@ class Location
 
 		if self.address then
 			search = Geocoder.search(self.address)		
-			result =  search.first			
-			self.coordinates = result.coordinates if self.address_changed? || self.new_record?
-			self.latitude = result.coordinates[0]
-			self.longitude = result.coordinates[1]
+			result =  search.first
+			self.latitude = result.latitude
+			self.longitude = result.longitude
 		end 
 
 	end
