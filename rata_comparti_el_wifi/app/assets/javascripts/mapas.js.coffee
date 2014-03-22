@@ -57,7 +57,7 @@ jQuery ->
 		addMarker = (map,longitude, latitude) -> 
 			markerslayer = new OpenLayers.Layer.Markers( "Markers" )
 			map.addLayer(markerslayer)
-			size = new OpenLayers.Size(30,35);
+			size = new OpenLayers.Size(50,55);
 			offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
 			icon = new OpenLayers.Icon('http://www.clker.com/cliparts/W/x/V/N/a/o/orange-pin-md.png', size, offset)
 			lonLat = new OpenLayers.LonLat(longitude, latitude).transform( fromProjection, toProjection)
