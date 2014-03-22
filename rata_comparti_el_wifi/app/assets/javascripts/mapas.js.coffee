@@ -112,6 +112,8 @@ jQuery ->
 		
 		$("#lock_up_location").click () -> 
 			$("#contextMenu").hide()
+			$("#bodyContent").hide "slow", () -> 
+				$("#map").show "slow"
 			address = $("#busca_router").val()
 			url = "search_by_address/" + address
 			request = $.ajax
