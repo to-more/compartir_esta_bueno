@@ -16,6 +16,8 @@ jQuery ->
 
 		mapEventManager.keydown_on_busca_router()
 
+		mapEventManager.enter_pressed_on_busca_router()
+
 		mapEventManager.onload_main_bar()
 
 		mapEventManager.on_mouseover_main_bar()

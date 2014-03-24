@@ -20,6 +20,16 @@ class window.MapEventManager
 					$("#bodyContent").show "slow", ()->
 						$("#bodyContent").load url
 
+		enter_pressed_on_busca_router: ->
+			enter_pressed = (event) ->
+				event = event or window.event
+				if event
+					key = event.keyCode or event.which
+					if key is 13
+						event.preventDefault()
+						$("#lock_up_location").trigger "click"
+			$("#busca_router").keypress enter_pressed		
+
 		keyup_on_busca_router: ->
 			$("#busca_router").keyup((e)->
 				if e.keyCode is 9 
