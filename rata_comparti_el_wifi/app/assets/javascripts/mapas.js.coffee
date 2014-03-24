@@ -7,8 +7,6 @@ jQuery ->
 		zoom = 11
 
 
-
-
 		$("#back_to_root").click (e)-> 
 			$("#bodyContent").hide "slow", () -> 
 				$("#map").show "slow"
@@ -48,21 +46,7 @@ jQuery ->
 			$("#main-bar").stop().animate({opacity: 0.0},"slow") if idFocused isnt "busca_router"
 		)
 
-		map = new OpenLayers.Map("map")
-		mapnik = new OpenLayers.Layer.OSM()
-		fromProjection = new OpenLayers.Projection("EPSG:4326")
-		toProjection = new OpenLayers.Projection("EPSG:900913")
-		map.addLayer(mapnik)
-
-		addMarker = (map,longitude, latitude) -> 
-			markerslayer = new OpenLayers.Layer.Markers( "Markers" )
-			map.addLayer(markerslayer)
-			size = new OpenLayers.Size(50,55);
-			offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-			icon = new OpenLayers.Icon('http://www.clker.com/cliparts/W/x/V/N/a/o/orange-pin-md.png', size, offset)
-			lonLat = new OpenLayers.LonLat(longitude, latitude).transform( fromProjection, toProjection)
-			markerslayer.addMarker( new OpenLayers.Marker lonLat, icon)
-			lonLat
+		map = new Map("map")
 
 		request_index = $.ajax
 			type: "GET"
@@ -77,9 +61,8 @@ jQuery ->
 						long = node.location.coordinates[0]
 						lat  = node.location.coordinates[1] 
 						console.log "Address: " + node.location.address
-						console.log "[" + lat + "," + long + "]";
-
-					lonLat = addMarker(map, long, lat)
+						console.log "[" + lat + "," + long + "]"
+						map.addMarker(long, lat)
 
 		resp = $.getJSON "http://api.hostip.info/get_json.php", (data) ->
 			console.log data.ip
@@ -93,8 +76,8 @@ jQuery ->
 				success: (data) ->
 					console.log data.latitude
 					console.log data.longitude
-					lonLat = addMarker(map,data.longitude, data.latitude)
-					map.setCenter(lonLat, zoom )
+					map.addMarker(data.longitude, data.latitude)
+					map.center(data.longitude, data.latitude, zoom )
 
 		contextMenu = $("#contextMenu")
 		
@@ -108,7 +91,7 @@ jQuery ->
 
 		$("body").on "contextmenu",  "#map", subMenu
 
-		map.events.register "click", map.events.object, () -> contextMenu.hide()
+		map.take_event_with_listener "click", () -> contextMenu.hide()
 		
 		$("#lock_up_location").click () -> 
 			$("#contextMenu").hide()
@@ -123,9 +106,9 @@ jQuery ->
 				success: (data) -> 
 					console.log data.latitude
 					console.log data.longitude
-					lonLat = addMarker(map,data.longitude, data.latitude)
+					map.addMarker(data.longitude, data.latitude)
 					zoom = 15
-					map.setCenter(lonLat, zoom )
+					map.center(data.longitude, data.latitude, zoom )
 
 
 		enter_pressed = (event) -> 
@@ -137,5 +120,3 @@ jQuery ->
 					$("#lock_up_location").trigger "click"
 
 		$("#busca_router").keypress enter_pressed
-		
-		map.addControl(new OpenLayers.Control.LayerSwitcher())
