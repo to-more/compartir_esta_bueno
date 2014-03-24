@@ -1,0 +1,48 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+
+class window.MapEventManager
+		
+		back_to_root: ->
+			$("#back_to_root").click (e)-> 
+				$("#bodyContent").hide "slow", () -> 
+					$("#map").show "slow"
+					e.preventDefault()
+				false
+
+		new_node: ->
+			$("#new_node").click (e)-> 
+				e.preventDefault()
+				$("#contextMenu").hide()
+				$("#map").hide "slow", ()->
+					url = "/nodes/new#main_container"
+					$("#bodyContent").show "slow", ()->
+						$("#bodyContent").load url
+
+		keyup_on_busca_router: ->
+			$("#busca_router").keyup((e)->
+				if e.keyCode is 9 
+					$("#main-bar").animate({opacity: 0.45},"slow")
+			)
+
+		keydown_on_busca_router: ->
+			$("#busca_router").keydown((e)->
+				if e.keyCode is 9 
+					$("#main-bar").animate({opacity: 0.0},"slow")
+			)
+
+		onload_main_bar: -> 
+			$("#main-bar").animate({opacity: 0.45},"slow")
+
+		on_mouseover_main_bar: ->
+			$("#main-bar").on("mouseover",() ->
+				$("#main-bar").stop().animate({opacity: 0.85},"slow")
+			)
+
+		on_mouseleave_main_bar: -> 
+			$("#main-bar").on("mouseleave",(e) ->
+				focused = $(document.activeElement)
+				idFocused = focused.attr("id")
+				$("#main-bar").stop().animate({opacity: 0.0},"slow") if idFocused isnt "busca_router"
+			)

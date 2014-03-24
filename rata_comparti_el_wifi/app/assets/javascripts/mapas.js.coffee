@@ -6,44 +6,21 @@ jQuery ->
 
 		zoom = 11
 
+		mapEventManager = new MapEventManager()
 
-		$("#back_to_root").click (e)-> 
-			$("#bodyContent").hide "slow", () -> 
-				$("#map").show "slow"
-				e.preventDefault()
-			false
+		mapEventManager.back_to_root()
 
-		$("#new_node").click (e)-> 
-			e.preventDefault()
-			$("#contextMenu").hide()
-			$("#map").hide "slow", loadRelated
+		mapEventManager.new_node()
 
-		loadRelated = () ->
-			url = "/nodes/new#main_container"
-			$("#bodyContent").load url, "slow"
-			
+		mapEventManager.keyup_on_busca_router()
 
-		$("#busca_router").keyup((e)->
-			if e.keyCode is 9 
-				$("#main-bar").animate({opacity: 0.45},"slow")
-		)
+		mapEventManager.keydown_on_busca_router()
 
-		$("#busca_router").keydown((e)->
-			if e.keyCode is 9 
-				$("#main-bar").animate({opacity: 0.0},"slow")
-		)
+		mapEventManager.onload_main_bar()
 
-		$("#main-bar").animate({opacity: 0.45},"slow")
+		mapEventManager.on_mouseover_main_bar()
 
-		$("#main-bar").on("mouseover",() ->
-			$("#main-bar").stop().animate({opacity: 0.85},"slow")
-		)
-
-		$("#main-bar").on("mouseleave",(e) ->
-			focused = $(document.activeElement)
-			idFocused = focused.attr("id")
-			$("#main-bar").stop().animate({opacity: 0.0},"slow") if idFocused isnt "busca_router"
-		)
+		mapEventManager.on_mouseleave_main_bar()
 
 		map = new Map("map")
 
