@@ -14,6 +14,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require openlayers-rails
 //= require_tree
+//= require openlayers-rails
 //= require bootstrap

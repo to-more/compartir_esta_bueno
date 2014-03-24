@@ -19,9 +19,8 @@ jQuery ->
 			$("#map").hide "slow", loadRelated
 
 		loadRelated = () ->
-			url = "/nodes/new"
-			$("#bodyContent").show "slow", ()->
-				$("#bodyContent").load url
+			url = "/nodes/new#main_container"
+			$("#bodyContent").load url, "slow"
 			
 
 		$("#busca_router").keyup((e)->
@@ -109,14 +108,3 @@ jQuery ->
 					map.addMarker(data.longitude, data.latitude)
 					zoom = 15
 					map.center(data.longitude, data.latitude, zoom )
-
-
-		enter_pressed = (event) -> 
-			event = event or window.event
-			if event
-				key = event.keyCode or event.which
-				if key is 13
-					event.preventDefault()
-					$("#lock_up_location").trigger "click"
-
-		$("#busca_router").keypress enter_pressed
