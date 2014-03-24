@@ -24,9 +24,9 @@ class window.Map
 		@map.events.register event, @map.events.object, listener
 
 	constructor: (tag) ->
-    	@map = new OpenLayers.Map(tag)
-    	@fromProjection = new OpenLayers.Projection("EPSG:4326")
-    	@toProjection = new OpenLayers.Projection("EPSG:900913")
-    	mapnik = new OpenLayers.Layer.OSM()
-    	@map.addLayer(mapnik)
-    	@map.addControl(new OpenLayers.Control.LayerSwitcher())
+		@map = new OpenLayers.Map(tag)
+		@fromProjection = new OpenLayers.Projection("EPSG:4326")
+		@toProjection = new OpenLayers.Projection("EPSG:900913")
+		mapnik = new OpenLayers.Layer.OSM()
+		@map.addLayer(mapnik)
+		@map.addControl(new OpenLayers.Control.LayerSwitcher())
