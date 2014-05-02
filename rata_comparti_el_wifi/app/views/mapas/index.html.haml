@@ -25,3 +25,14 @@
       %a{:tabindex=>"-1", :role=>"menuitem", :href=>"#"}Action
 
 #bodyContent
+
+%div{ :id=>"modal", :class=>"modal fade bs-example-modal-sm", :tabindex=>"-1", :role=>"dialog", :aria => {:labelledby=>"mySmallModalLabel", :hidden=>"true"} }
+  %div{ :class=>"modal-dialog modal-sm"}
+    %div{ :class=>"modal-content"}
+      %div{ :class=>"modal-body"}
+        #address
+        #essid 
+        #pass 
+      %div{ :class=>"modal-footer"}
+        %button{ :type=>"button", :class=>"btn btn-default", :data => { :dismiss=>"modal" } }
+          Close

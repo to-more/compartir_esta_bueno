@@ -21,8 +21,10 @@ class Location
 		if self.address then
 			search = Geocoder.search(self.address)		
 			result =  search.first
-			self.latitude = result.latitude
-			self.longitude = result.longitude
+			if result
+				self.latitude = result.latitude
+				self.longitude = result.longitude
+			end
 		end 
 
 	end

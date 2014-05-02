@@ -40,7 +40,7 @@ jQuery ->
 						lat  = node.location.coordinates[1] 
 						console.log "Address: " + node.location.address
 						console.log "[" + lat + "," + long + "]"
-						map.addMarker(long, lat)
+						map.addMarker(long, lat, node)
 
 		resp = $.getJSON "http://api.hostip.info/get_json.php", (data) ->
 			console.log data.ip

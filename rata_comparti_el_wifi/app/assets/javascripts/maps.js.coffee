@@ -7,14 +7,29 @@ class window.Map
 	getLonLat: (longitude, latitude) ->
 		lonLat = new OpenLayers.LonLat(longitude, latitude).transform( @fromProjection, @toProjection)
 
-	addMarker: (longitude, latitude) ->
+	addMarker: (longitude, latitude, node) ->
 		markerslayer = new OpenLayers.Layer.Markers( "Markers" )
 		@map.addLayer(markerslayer)
 		size = new OpenLayers.Size(50,55);
 		offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
 		icon = new OpenLayers.Icon('http://www.clker.com/cliparts/W/x/V/N/a/o/orange-pin-md.png', size, offset)
 		lonLat = this.getLonLat(longitude, latitude)
-		markerslayer.addMarker( new OpenLayers.Marker lonLat, icon)
+		marker = new OpenLayers.Marker lonLat, icon
+
+		listener = () -> 
+			if node
+				address = node.location.address
+				essid = node.router.essid
+				pass  = node.router.password
+				$("#address").html("Address: " + address)
+				$("#essid").html("Essid: " + essid)
+				$("#pass").html("Password: " + pass)
+
+				$('#modal').modal('show')
+			
+		marker.events.register "mouseover", marker.events.object, listener
+
+		markerslayer.addMarker( marker )
 
 	center: (longitude, latitude, zoom) -> 
 		lonLat = this.getLonLat(longitude, latitude)
