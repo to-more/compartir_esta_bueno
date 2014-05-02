@@ -18,15 +18,15 @@ class window.Map
 
 		listener = () -> 
 			if node
-				address = node.location.address
-				essid = node.router.essid
-				pass  = node.router.password
+				address = node.location.address if node.location
+				essid = node.router.essid if node.router
+				pass  = node.router.password if node.router
 				$("#address").html("Address: " + address)
 				$("#essid").html("Essid: " + essid)
 				$("#pass").html("Password: " + pass)
 
 				$('#modal').modal('show')
-			
+
 		marker.events.register "mouseover", marker.events.object, listener
 
 		markerslayer.addMarker( marker )
