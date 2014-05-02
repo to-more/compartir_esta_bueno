@@ -18,9 +18,10 @@ class window.Map
 
 		listener = () -> 
 			if node
-				address = node.location.address if node.location
-				essid = node.router.essid if node.router
-				pass  = node.router.password if node.router
+				empty = ""
+				address = if node.location then node.location.address else empty
+				essid = if  node.router then node.router.essid else empty
+				pass  = if  node.router then node.router.password else empty
 				$("#address").html("Address: " + address)
 				$("#essid").html("Essid: " + essid)
 				$("#pass").html("Password: " + pass)
