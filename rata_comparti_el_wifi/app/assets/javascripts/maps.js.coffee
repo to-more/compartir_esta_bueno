@@ -7,14 +7,27 @@ class window.Map
 	getLonLat: (longitude, latitude) ->
 		lonLat = new OpenLayers.LonLat(longitude, latitude).transform( @fromProjection, @toProjection)
 
-	addMarker: (longitude, latitude, node) ->
+	addMarker: (longitude, latitude) ->
 		markerslayer = new OpenLayers.Layer.Markers( "Markers" )
-		@map.addLayer(markerslayer)
+		
 		size = new OpenLayers.Size(50,55);
 		offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
 		icon = new OpenLayers.Icon('http://www.clker.com/cliparts/W/x/V/N/a/o/orange-pin-md.png', size, offset)
 		lonLat = this.getLonLat(longitude, latitude)
 		marker = new OpenLayers.Marker lonLat, icon
+		
+		node = new Object
+
+		coordinate = { "longitude":longitude, "latitude": latitude}
+		url = "/search_by_coordinate"
+		$.ajax
+			data: {coordinate: coordinate}
+			type: "GET"
+			url: url
+			dataType: "json"		
+			success: (data) -> 
+				node = data
+				console.log node.location
 
 		listener = () -> 
 			if node
@@ -31,6 +44,8 @@ class window.Map
 		marker.events.register "mouseover", marker.events.object, listener
 
 		markerslayer.addMarker( marker )
+
+		@map.addLayer(markerslayer)
 
 	center: (longitude, latitude, zoom) -> 
 		lonLat = this.getLonLat(longitude, latitude)

@@ -24,6 +24,15 @@ class NodesController < ApplicationController
   def edit
   end
 
+  # GET /search_by_coordinate?coordinate[longitude]=-58.6725&coordinate[latitude]=-34.587500000000006
+  def search_by_coordinate
+    coordinate = params[:coordinate]
+    
+    @node = Node.find_by_coordinate { coordinate }
+
+    render json: @node.first
+  end
+
   # POST /nodes
   # POST /nodes.json
   def create
