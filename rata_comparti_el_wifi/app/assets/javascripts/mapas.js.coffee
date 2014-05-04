@@ -36,8 +36,8 @@ jQuery ->
 					long = 0
 					lat = 0
 					if node.location 
-						long = node.location.coordinates[0]
-						lat  = node.location.coordinates[1] 
+						long = node.location.longitude
+						lat  = node.location.latitude
 						console.log "Address: " + node.location.address
 						console.log "[" + lat + "," + long + "]"
 						map.addMarker(long, lat)

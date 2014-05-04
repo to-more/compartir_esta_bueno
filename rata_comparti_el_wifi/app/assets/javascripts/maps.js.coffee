@@ -27,19 +27,38 @@ class window.Map
 			dataType: "json"		
 			success: (data) -> 
 				node = data
-				console.log node.location
 
 		listener = () -> 
 			if node
 				empty = ""
 				address = if node.location then node.location.address else empty
-				essid = if  node.router then node.router.essid else empty
-				pass  = if  node.router then node.router.password else empty
-				$("#address").html("Address: " + address)
-				$("#essid").html("Essid: " + essid)
-				$("#pass").html("Password: " + pass)
+				if node.routers
+					routers = node.routers
 
-				$('#modal').modal('show')
+					ul = $("<ul/>")
+					ul.attr "id", address
+					
+					$.each routers, (i) ->
+						exist = ul.children "#"+i
+						if exist.length is 0
+							li = $("<li/>")
+							li.attr "id", i
+							li.appendTo(ul)
+
+							essid = $("<div/>")
+							essid.text( "Essid:" + routers[i].essid)
+
+							pass = $("<div/>")
+							pass.text "Password:" + routers[i].password
+
+							li.html essid.append pass
+
+				$("#address").html "Address: " + address
+
+				$("#router").text "Routers: "
+				$("#router").append ul
+
+				$("#modal").modal "show"
 
 		marker.events.register "mouseover", marker.events.object, listener
 

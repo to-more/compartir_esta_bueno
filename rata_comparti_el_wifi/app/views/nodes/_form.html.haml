@@ -4,7 +4,7 @@
       = f.fields_for @node.location do | location |
         = location.text_field :address, { :class=>"form-control", :placeholder=>"Address"}
 
-      = f.fields_for @node.router do | router |
+      = f.fields_for @node.routers.first do | router |
         = router.text_field :ip, { :class=>"form-control", :placeholder=>"ip"}
         = router.text_field :mac, { :class=>"form-control", :placeholder=>"mac"}
         = router.text_field :essid, { :class=>"form-control", :placeholder=>"essid"}

@@ -2,8 +2,10 @@ class Node
   	
 	include Mongoid::Document
 
-	embeds_one :router, class_name: "Router"
+	embeds_many :routers, class_name: "Router"
+	
 	embeds_one :location, class_name: "Location"
+
 	embeds_one :link, class_name: "Link"
 
 	class << self
@@ -12,8 +14,34 @@ class Node
 		    if coordinate
 		      longitude = coordinate['longitude'].to_f
 		      latitude = coordinate['latitude'].to_f
-		      node = Node.where( 'location.longitude' => longitude, 'location.latitude' =>  latitude)
+		      node = Node.where( 'location.longitude' => longitude, 'location.latitude' =>  latitude).first
 		    end	      
+	    end
+
+	    def build
+
+	    	node = yield
+
+	    	location = node[:location]
+    		router = node[:router]
+
+    		@node = Node.where( 'location.address' => location[:address]).first
+
+		    unless @node
+		    	@node = Node.new
+		    end
+
+		    @node.build_location( :address => location[:address])
+
+		    ruter = Router.new( :ip => router[:ip], 
+		      :mac =>  router[:mac], 
+		      :essid => router[:essid], 
+		      :password => router[:password]
+		    )
+
+		    @node.routers.push ruter
+		    
+		    return @node
 	    end
   	end  	
 

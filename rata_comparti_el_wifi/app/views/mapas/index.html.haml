@@ -26,13 +26,16 @@
 
 #bodyContent
 
-%div{ :id=>"modal", :class=>"modal fade bs-example-modal-sm", :tabindex=>"-1", :role=>"dialog", :aria => {:labelledby=>"mySmallModalLabel", :hidden=>"true"} }
+
+
+#modal{:class=>"modal fade bs-example-modal-sm",:tabindex=>"-1",:role=>"dialog",:aria => {:labelledby=>"mySmallModalLabel", :hidden=>"true"} }
   %div{ :class=>"modal-dialog modal-sm"}
-    %div{ :class=>"modal-content"}
-      %div{ :class=>"modal-body"}
+    #modal_content{ :class=>"modal-content"}
+      #modal_header{ :class=>"modal-header"}
+        %h4{ :class=>"modal-title", :id=>"myModalLabel"}Node detail
+      #modal_content{ :class=>"modal-body"}
         #address
-        #essid 
-        #pass 
-      %div{ :class=>"modal-footer"}
+        #router
+      #modal_footer{ :class=>"modal-footer"}
         %button{ :type=>"button", :class=>"btn btn-default", :data => { :dismiss=>"modal" } }
           Close

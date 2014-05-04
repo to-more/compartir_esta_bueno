@@ -17,7 +17,7 @@ class NodesController < ApplicationController
   def new
     @node = Node.new
     @node.build_location
-    @node.build_router
+    @node.routers.build
   end
 
   # GET /nodes/1/edit
@@ -30,14 +30,14 @@ class NodesController < ApplicationController
     
     @node = Node.find_by_coordinate { coordinate }
 
-    render json: @node.first
+    render json: @node
   end
 
   # POST /nodes
   # POST /nodes.json
   def create
-    
-    @node = Node.new(node_params)
+
+    @node = Node.build { params[:node] }
 
     respond_to do |format|
       if @node.save
