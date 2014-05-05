@@ -1,12 +1,12 @@
 RataCompartiElWifi::Application.routes.draw do
 
-  resources :nodes
-
-  resources :locations
-
-  resources :routers
-
-  resources :maps
+  scope "(:locale)", locale: /es|en/ do
+    resources :nodes
+    resources :locations
+    resources :routers
+    resources :maps
+    get '/', to: 'mapas#index'
+  end
 
   get '/search_by_address/:address', to: 'locations#search_by_address'
 

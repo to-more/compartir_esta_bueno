@@ -2,12 +2,12 @@
   #node{:class => "form-signin"}
     = form_for(@node) do |f|
       = f.fields_for @node.location do | location |
-        = location.text_field :address, { :class=>"form-control", :placeholder=>"Address"}
+        = location.text_field :address, { :class=>"form-control", :placeholder=>t(:save_placeholder_addres)}
 
       = f.fields_for @node.routers.first do | router |
-        = router.text_field :ip, { :class=>"form-control", :placeholder=>"ip"}
-        = router.text_field :mac, { :class=>"form-control", :placeholder=>"mac"}
-        = router.text_field :essid, { :class=>"form-control", :placeholder=>"essid"}
-        = router.text_field :password, { :class=>"form-control", :placeholder=>"password"}
+        = router.text_field :ip, { :class=>"form-control", :placeholder=> t(:save_placeholder_ip)}
+        = router.text_field :mac, { :class=>"form-control", :placeholder=> t(:save_placeholder_mac)}
+        = router.text_field :essid, { :class=>"form-control", :placeholder=> t(:save_placeholder_essid)}
+        = router.text_field :password, { :class=>"form-control", :placeholder=>t(:save_placeholder_pass)}
 
-      = f.submit 'Guardar', {:class=>"btn btn-lg btn-primary btn-block", :type=>"submit"}
+      = f.submit t(:btn_save) , {:class=>"btn btn-lg btn-primary btn-block", :type=>"submit"}

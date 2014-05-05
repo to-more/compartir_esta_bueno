@@ -19,22 +19,22 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  btn_save: "Save"
-  btn_close: "Close"
+es:
+  btn_save: "Guardar"
+  btn_close: "Cerrar"
   # main nav bar
-  nav_placeholder_search: "Find your router"
-  nav_btn_search: "Bro you can put direction to search"
-  index_link: "Share is good"
+  nav_placeholder_search: "Encontrá tu router"
+  nav_btn_search: "Podés buscar por direccion"
+  index_link: "Compartir esta bueno"
   # save new node form
-  save_placeholder_addres: "near to the router"
+  save_placeholder_addres: "dire aproximada"
   save_placeholder_essid: "essid"
   save_placeholder_pass: "password"
   save_placeholder_mac: "mac"
   save_placeholder_ip: "ip"
   # map dropdown actions
-  share_action: "Share your router"
+  share_action: "Compartir router"
   # node details
-  header_text: "Node details"
-  address_text: "Address:"
+  header_text: "Detalles de tu nodo"
+  address_text: "Direccion:"
   router_text: "Routers:"
