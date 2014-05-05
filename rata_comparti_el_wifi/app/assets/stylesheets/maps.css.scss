@@ -1,3 +1,71 @@
 // Place all the styles related to the maps controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$background-color: #6F5499;	 
+$opacity: 0.6;
+$width: 99.5%;
+$height: 99.5%;
+
+@mixin side-border($color, $pixel) {
+    border-right: $pixel solid $color;
+    border-left: $pixel solid $color;
+}
+
+@mixin end-border($color, $pixel) {
+    border-top: $pixel solid $color;
+    border-bottom: $pixel solid $color;
+}
+
+@mixin rectangular-percentage($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+html, 
+body,
+#map {
+    border:0%;
+    @include rectangular-percentage($width, $height)
+}
+.jumbotron{
+    border:0%;
+    padding-top: 2%;
+    padding-bottom: 0% !important;
+    padding-left: 0%;
+    padding-right: 0% ;
+    @include rectangular-percentage($width, $height)
+}
+
+.container{
+    width: $width;
+    height: $height;
+    border:0%;
+    padding-bottom: 0% !important;
+}
+
+#main-bar{
+	background-color: $background-color
+}
+
+#contextMenu {
+    position: absolute;
+    display:none;
+}
+
+.modal-header {
+    @include end-border($background-color,2px)
+}
+
+.modal-footer {
+    @include end-border($background-color,2px)
+}
+
+.modal-content {
+    @include side-border($background-color,2px)
+}
+
+a:hover{
+    opacity: $opacity;
+	color: white !important;
+    background-color: $background-color !important
+}
