@@ -5,23 +5,19 @@ RataCompartiElWifi::Application.routes.draw do
     resources :locations
     resources :routers
     resources :maps
+    resources :mapas
     get '/', to: 'mapas#index'
+    get '/search_by_address/:address', to: 'locations#search_by_address'
+    get '/search_by_ip/:ip', to: 'locations#search_by_ip'
+    get '/search_by_coordinate', to: 'nodes#search_by_coordinate'
+    root 'mapas#index'
   end
-
-  get '/search_by_address/:address', to: 'locations#search_by_address'
-
-  get '/search_by_ip/:ip', to: 'locations#search_by_ip'
-
-  get '/search_by_coordinate', to: 'nodes#search_by_coordinate'
-
-  resources :mapas
 
   #get "welcome/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'mapas#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

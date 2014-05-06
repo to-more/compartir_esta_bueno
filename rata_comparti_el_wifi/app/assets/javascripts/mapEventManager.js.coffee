@@ -14,9 +14,13 @@ class window.MapEventManager
 		new_node: ->
 			$("#new_node").click (e)-> 
 				e.preventDefault()
+				locale = window.location.pathname.replace /[/]/g, ""
+
+				locale = "/#{locale}" unless locale is "" 
+
 				$("#contextMenu").hide()
 				$("#map").hide "slow", ()->
-					url = "/nodes/new#main_container"
+					url = "#{locale}/nodes/new#main_container"
 					$("#bodyContent").show "slow", ()->
 						$("#bodyContent").load url
 
