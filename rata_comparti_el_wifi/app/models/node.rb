@@ -36,7 +36,9 @@ class Node
 		    ruter = Router.new( :ip => router[:ip], 
 		      :mac =>  router[:mac], 
 		      :essid => router[:essid], 
-		      :password => router[:password]
+		      :password => router[:password],
+		      :channel => router[:channel],
+		      :comment => router[:comment]
 		    )
 
 		    @node.routers.push ruter

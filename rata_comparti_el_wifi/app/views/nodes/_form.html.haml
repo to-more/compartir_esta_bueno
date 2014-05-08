@@ -9,5 +9,6 @@
         = router.text_field :mac, { :class=>"form-control", :placeholder=> t(:save_placeholder_mac)}
         = router.text_field :essid, { :class=>"form-control", :placeholder=> t(:save_placeholder_essid)}
         = router.text_field :password, { :class=>"form-control", :placeholder=>t(:save_placeholder_pass)}
-
+        = router.text_field :channel, { :class=>"form-control", :placeholder=>t(:save_placeholder_channel)}
+        = router.text_field :comment, { :class=>"form-control", :placeholder=>t(:save_placeholder_comment)}
       = f.submit t(:btn_save) , {:class=>"btn btn-lg btn-primary btn-block", :type=>"submit"}

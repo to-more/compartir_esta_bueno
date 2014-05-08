@@ -5,6 +5,8 @@ class Router
   field :online, type: Mongoid::Boolean
   field :ip, type: String
   field :password, type: String
+  field :channel, type: Integer
+  field :comment, type: String
 
   embedded_in :node
 

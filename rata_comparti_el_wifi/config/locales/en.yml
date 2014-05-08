@@ -32,6 +32,8 @@ en:
   save_placeholder_pass: "password"
   save_placeholder_mac: "mac"
   save_placeholder_ip: "ip"
+  save_placeholder_channel: "El canal donde esta la red"
+  save_placeholder_comment: "Un comentario sobre como funciona la red, es lenta, vuela, etc"  
   # map dropdown actions
   share_action: "Share your router"
   # node details

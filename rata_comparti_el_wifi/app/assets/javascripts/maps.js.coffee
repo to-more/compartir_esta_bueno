@@ -51,7 +51,13 @@ class window.Map
 							pass = $("<div/>")
 							pass.text "Password:" + routers[i].password
 
-							li.html essid.append pass
+							channel = $("<div/>")
+							channel.text "channel:" + routers[i].channel
+
+							comment = $("<div/>")
+							comment.text "comment:" + routers[i].comment
+
+							li.html essid.append pass.append channel.append comment
 
 				$("#address").html "Address: " + address
 
@@ -60,7 +66,7 @@ class window.Map
 
 				$("#modal").modal "show"
 
-		marker.events.register "mouseover", marker.events.object, listener
+		marker.events.register "click", marker.events.object, listener
 
 		markerslayer.addMarker( marker )
 
