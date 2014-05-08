@@ -14,6 +14,7 @@ class Router
 
   def set_online
   	self.online = false
+    self.comment = ""
   end
 
 end

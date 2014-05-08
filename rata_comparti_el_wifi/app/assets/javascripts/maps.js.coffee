@@ -52,7 +52,10 @@ class window.Map
 							pass.text "Password:" + routers[i].password
 
 							channel = $("<div/>")
-							channel.text "channel:" + routers[i].channel
+
+							channel_text = empty unless routers[i].channel
+
+							channel.text "channel:" + channel_text
 
 							comment = $("<div/>")
 							comment.text "comment:" + routers[i].comment
