@@ -53,7 +53,7 @@ class window.Map
 
 							channel = $("<div/>")
 
-							channel_text = empty unless routers[i].channel
+							channel_text = if routers[i].channel then routers[i].channel else empty
 
 							channel.text "channel:" + channel_text
 
