@@ -13,6 +13,10 @@ class NodesController < ApplicationController
   def show
   end
 
+  def get_image
+    send_file Rails.root.join("public", "node.png"), type: "image/gif", disposition: "inline"
+  end
+
   # GET /nodes/new
   def new
     @node = Node.new

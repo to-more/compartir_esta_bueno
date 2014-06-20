@@ -12,7 +12,9 @@ class window.Map
 		
 		size = new OpenLayers.Size(50,55);
 		offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-		icon = new OpenLayers.Icon('http://www.clker.com/cliparts/W/x/V/N/a/o/orange-pin-md.png', size, offset)
+
+		icon = new OpenLayers.Icon("#{window.location.href}get_image", size, offset)
+
 		lonLat = this.getLonLat(longitude, latitude)
 		marker = new OpenLayers.Marker lonLat, icon
 		

@@ -11,6 +11,7 @@ RataCompartiElWifi::Application.routes.draw do
     get '/search_by_ip/:ip', to: 'locations#search_by_ip'
     get '/search_by_coordinate', to: 'nodes#search_by_coordinate'
     root 'mapas#index'
+    get '/get_image', to: 'nodes#get_image'
   end
 
   #get "welcome/index"
